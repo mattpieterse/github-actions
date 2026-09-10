@@ -22,8 +22,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     env:
-      COMMIT_MESSAGE:
-        ${{ inputs.commit_message || 'chore: update submodules' }}
+      COMMIT_MESSAGE: ${{ inputs.commit_message || 'chore: update submodules' }}
 
     steps:
       - name: Checkout
