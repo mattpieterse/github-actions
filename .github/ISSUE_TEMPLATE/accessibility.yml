@@ -1,6 +1,6 @@
 name: Accessibility Issue
 description: Report an accessibility issue caused by the contents or structure of this repository's README.
-title: "[Accessibility] "
+title: ""
 labels:
   - a11y
 
@@ -82,18 +82,6 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id: reproduction
-    attributes:
-      label: Steps to reproduce
-      description: Provide clear steps for locating and experiencing the issue in the README.
-      placeholder: |
-        1. Open the README.
-        2. Navigate to the affected section.
-        3. ...
-    validations:
-      required: true
-
   - type: dropdown
     id: impact
     attributes:
@@ -123,13 +111,6 @@ body:
         - Voice control
 
         Include the specific software only if it is relevant to reproducing the issue.
-
-  - type: input
-    id: browser
-    attributes:
-      label: Browser and environment
-      description: If the issue depends on a particular rendering environment, provide the browser and operating system.
-      placeholder: "For example: Firefox 155 on Windows 11"
 
   - type: textarea
     id: guideline
@@ -165,5 +146,5 @@ body:
           required: true
         - label: I have confirmed that this issue will not create a duplicate of any existing accessibility reports in this repository.
           required: true
-        - label: I have confirmed that this is an issue with the contents or structure of the README, and not with the GitHub interface itself.
+        - label: I have confirmed that this is an issue with the contents or structure of the README, and not with the GitHub interface and GitHub's accessibility implementations on the website. I understand that the author of this repository has no control over these features.
           required: true
