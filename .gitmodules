@@ -1,0 +1,3 @@
+[submodule "validate-branch-convention"]
+	path = validate-branch-convention
+	url = git@github.com:mattpieterse/validate-branch-convention.git
