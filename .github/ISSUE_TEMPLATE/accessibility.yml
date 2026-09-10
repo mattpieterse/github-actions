@@ -1,6 +1,5 @@
 name: Accessibility Issue
-description: Report an accessibility issue caused by the contents or structure of this repository's README.
-title: ""
+description: Report an accessibility issue caused by the contents or structure of this repository's README
 labels:
   - a11y
 
