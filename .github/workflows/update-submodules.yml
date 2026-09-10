@@ -8,7 +8,7 @@ on:
       commit_message:
         description: Commit message for the submodule update
         required: false
-        default: "chore: update submodules to latest main"
+        default: "chore: update submodules"
         type: string
 
 permissions:
