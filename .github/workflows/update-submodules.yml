@@ -1,0 +1,67 @@
+name: Update submodules
+
+on:
+  schedule:
+    - cron: "30 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: Commit message for the submodule update
+        required: false
+        default: "chore: update submodules to latest main"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-submodules
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      COMMIT_MESSAGE:
+        ${{ inputs.commit_message || 'chore: update submodules' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Configure submodule access
+        run: git config --global url."https://github.com/".insteadOf "git@github.com:"
+
+      - name: Update submodules from main
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git submodule sync --recursive
+          git submodule update --init --recursive
+
+          git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
+            while read -r name path; do
+              git -C "$path" fetch origin main
+              git -C "$path" checkout -B main origin/main
+              git -C "$path" reset --hard origin/main
+            done
+
+      - name: Commit and push changes
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if git diff --quiet; then
+            echo "Submodules are already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "$COMMIT_MESSAGE"
+          git push origin HEAD:main
