@@ -1,3 +1,6 @@
 [submodule "validate-branch-convention"]
 	path = validate-branch-convention
 	url = git@github.com:mattpieterse/validate-branch-convention.git
+[submodule "validate-commit-convention"]
+	path = validate-commit-convention
+	url = git@github.com:mattpieterse/validate-commit-convention.git
